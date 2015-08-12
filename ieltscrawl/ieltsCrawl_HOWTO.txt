@@ -1,0 +1,18 @@
+Hello EveryOne,
+
+
+IeltsCrawl is a scrapy program that sends us email everytime for a change in the date value.
+It is written in python using scrapy web crawler.
+Before you run this I assume that you have:
+
+1) MySQL installed in your PC.
+2) Scrapy installed in your PC.
+3) If not please install them.
+
+Then,
+
+1. Run the mysql commands to create database, table and trigger available in mysqlIelts.sql file in mysqlDesign folder.
+2. Go to ieltsCrawl folder.
+3. Add your email address in pipelines.py in the folder ieltsCrawl\ieltsCrawl\ in TO list.
+4. Save this file and go to outer ieltsCrawl folder and 
+4. Run the command "scrapy crawl ieCrawl" (without quotes).
