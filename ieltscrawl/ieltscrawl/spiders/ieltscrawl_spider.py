@@ -26,12 +26,12 @@ class IeltscrawlSpider(scrapy.Spider):
         item['module'] = Selector(response).xpath('//*[@id="ctl00_ContentPlaceHolder1_ddlModule"]/option/text()').extract()
 
         item['start_urls'] = response.request.url
-
+        url = item['start_urls'] 
         yield item
 
         print("\n\n\n NNOw Lests move to reading the db \n\n\n")
 
         Query = "SELECT check_date();"
 
-        result = pipe.read_db(Query)
+        result = pipe.read_db(Query, url)
 

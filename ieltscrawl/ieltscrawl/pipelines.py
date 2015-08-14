@@ -14,6 +14,10 @@ from email.MIMEBase import MIMEBase
 from email.Utils import COMMASPACE, formatdate
 from email import Encoders
 from  smtplib import SMTPException
+
+#import ieltscrawl.spiders.ieltscrawl_spider
+from spiders.ieltscrawl_spider import *
+from ieltscrawl.items import IeltscrawlItem
    
 class IeltscrawlPipeline(object):
     def __init__(self):
@@ -49,13 +53,22 @@ class IeltscrawlPipeline(object):
 
         return item
 
-    def send_email(self):
+    def send_email(self, weburl):
+        item = IeltscrawlItem()
+        url = weburl
         gmail_user = "shresthasudip52@gmail.com"    
         gmail_pwd = "Gmail4624"
         FROM = 'shresthasudip52@gmail.com'
         TO = ['buzzer.52@gmail.com', 'rkapali@lftechnology.com', 'sudipshrestha@lftechnology.com', 'aakas.mee@gmail.com', 'naved_14@hotmail.com'] #must be a list
-        SUBJECT = "Testing sending using gmail"
-        TEXT = "Testing sending mail using gmail servers"
+        SUBJECT = "Guys! Hurry Up For New Ielts Date"
+        TEXT = """
+                        Hello Everyone!!
+
+                                    The new ielts date are here!! Please find the link below....
+
+                                    IeltsLink: %s
+
+                """%(url)
         # Prepare actual message
         message = """\From: %s\nTo: %s\nSubject: %s\n\n%s
         """ % (FROM, ", ".join(TO), SUBJECT, TEXT)
@@ -72,7 +85,7 @@ class IeltscrawlPipeline(object):
         except:
             print "failed to send mail"
 
-    def read_db(self, sqlQuery):
+    def read_db(self, sqlQuery, weburl):
         #ob = IeltscrawlPipeline()
         try:
             self.cursor.execute(sqlQuery)
@@ -81,7 +94,7 @@ class IeltscrawlPipeline(object):
             self.conn.commit()
             if(str(result[0][0]) == 'No Sucess'):
                 print("\n\n\n This  is sucess wait for the email...\n\n\n")     
-                self.send_email()
+                self.send_email(weburl)
                 if result == 0:
                     print("\n\n\n SUcessfully sent email....\n\n\n")
                 return result
