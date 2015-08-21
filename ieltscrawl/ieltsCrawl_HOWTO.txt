@@ -2,7 +2,7 @@ Hello EveryOne,
 
 
 IeltsCrawl is a scrapy program that sends us email everytime for a change in the date value.
-It is written in python using scrapy web crawler.
+It is written in python using scrapy web crawler and MySQL as data storage engine.
 Before you run this I assume that you have:
 
 1) MySQL installed in your PC.
